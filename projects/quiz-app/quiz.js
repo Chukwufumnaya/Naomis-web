@@ -5,87 +5,90 @@ const box = document.querySelector('.box');
 // API URL for fetching quiz categories
 const url = `https://opentdb.com/api_category.php/`;
 
-// Fetch quiz categories from the API
+function renderHomePage() {
+  document.body.style.backgroundImage = 'url(./images/quiz-image.png)';
 
-fetch(url)
-  .then((response) => {
+  // Fetch quiz categories from the API
 
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
-    }
-    return response.json()
-  })
-  .then((data) => {
-    //Create div for quiz categories
-    const quizCategories = document.createElement('div');
-    box.appendChild(quizCategories);
-    quizCategories.classList.add('quiz-categories');
+  fetch(url)
+    .then((response) => {
 
-    // Create and append label for quiz categories
-    const categoryLabelElement = document.createElement('label');
-    categoryLabelElement.for = 'categories';
-    categoryLabelElement.innerHTML = 'Choose a quiz category';
-
-
-    // Create and append select element for quiz categories
-    const categorySelectElement = document.createElement('select');
-    categorySelectElement.name = 'categories';
-    categorySelectElement.id = 'categories';
-
-    quizCategories.appendChild(categoryLabelElement);
-    quizCategories.appendChild(categorySelectElement);
-
-    // Create and append default option for category select element
-    const firstOptionElement = document.createElement('option');
-    firstOptionElement.value = '';
-    firstOptionElement.id = 'default-option';
-    firstOptionElement.innerHTML = 'Select a category';
-    firstOptionElement.classList.add('option-element');
-    categorySelectElement.appendChild(firstOptionElement);
-
-    // Append fetched categories to the select element
-    const triviaCategories = data.trivia_categories;
-
-
-    triviaCategories.forEach((category) => {
-      const optionElement = document.createElement('option');
-
-      optionElement.value = category.id;
-      optionElement.id = category.id;
-      optionElement.innerHTML = category.name;
-      optionElement.classList.add('option-element');
-
-      categorySelectElement.appendChild(optionElement);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json()
     })
+    .then((data) => {
+      //Create div for quiz categories
+      const quizCategories = document.createElement('div');
+      box.appendChild(quizCategories);
+      quizCategories.classList.add('quiz-categories');
 
-    let selectedCategoryID = 'default-option';
-
-    // Event listener for category selection
-    categorySelectElement.addEventListener('change', (event) => {
-      const selectedCategory = event.target.options[event.target.selectedIndex];
-      selectedCategoryID = selectedCategory.id;
-    })
-
-    //Create div for difficulties
-    const difficultyCategories = document.createElement('div');
-    box.appendChild(difficultyCategories);
-    difficultyCategories.classList.add('difficulties');
-
-    // Create and append label for difficulties
-    const difficultyLabelElement = document.createElement('label');
-    difficultyLabelElement.for = 'difficulty';
-    difficultyLabelElement.innerHTML = 'Choose a difficulty level';
-
-    // Create and append select element for difficulties
-    const difficultySelectElement = document.createElement('select');
-    difficultySelectElement.name = 'difficulty';
-    difficultySelectElement.id = 'difficulty';
-
-    difficultyCategories.appendChild(difficultyLabelElement);
-    difficultyCategories.appendChild(difficultySelectElement);
+      // Create and append label for quiz categories
+      const categoryLabelElement = document.createElement('label');
+      categoryLabelElement.for = 'categories';
+      categoryLabelElement.innerHTML = 'Choose a quiz category';
 
 
-    difficultySelectElement.innerHTML = `
+      // Create and append select element for quiz categories
+      const categorySelectElement = document.createElement('select');
+      categorySelectElement.name = 'categories';
+      categorySelectElement.id = 'categories';
+
+      quizCategories.appendChild(categoryLabelElement);
+      quizCategories.appendChild(categorySelectElement);
+
+      // Create and append default option for category select element
+      const firstOptionElement = document.createElement('option');
+      firstOptionElement.value = '';
+      firstOptionElement.id = 'default-option';
+      firstOptionElement.innerHTML = 'Select a category';
+      firstOptionElement.classList.add('option-element');
+      categorySelectElement.appendChild(firstOptionElement);
+
+      // Append fetched categories to the select element
+      const triviaCategories = data.trivia_categories;
+
+
+      triviaCategories.forEach((category) => {
+        const optionElement = document.createElement('option');
+
+        optionElement.value = category.id;
+        optionElement.id = category.id;
+        optionElement.innerHTML = category.name;
+        optionElement.classList.add('option-element');
+
+        categorySelectElement.appendChild(optionElement);
+      })
+
+      let selectedCategoryID = 'default-option';
+
+      // Event listener for category selection
+      categorySelectElement.addEventListener('change', (event) => {
+        const selectedCategory = event.target.options[event.target.selectedIndex];
+        selectedCategoryID = selectedCategory.id;
+      })
+
+      //Create div for difficulties
+      const difficultyCategories = document.createElement('div');
+      box.appendChild(difficultyCategories);
+      difficultyCategories.classList.add('difficulties');
+
+      // Create and append label for difficulties
+      const difficultyLabelElement = document.createElement('label');
+      difficultyLabelElement.for = 'difficulty';
+      difficultyLabelElement.innerHTML = 'Choose a difficulty level';
+
+      // Create and append select element for difficulties
+      const difficultySelectElement = document.createElement('select');
+      difficultySelectElement.name = 'difficulty';
+      difficultySelectElement.id = 'difficulty';
+
+      difficultyCategories.appendChild(difficultyLabelElement);
+      difficultyCategories.appendChild(difficultySelectElement);
+
+
+      difficultySelectElement.innerHTML = `
     <option class='option-element' id='default-option'>Select a difficulty level</option>
     <option class='option-element' id='easy'>Easy</option>
     <option class='option-element' id='medium'>Medium</option>
@@ -93,36 +96,36 @@ fetch(url)
     `;
 
 
-    let difficultyValue = 'default-option';
+      let difficultyValue = 'default-option';
 
-    // Event listener for difficulty selection
-    difficultySelectElement.addEventListener('change', (event) => {
-      const selectedDifficulty = event.target.options[event.target.selectedIndex];
-      difficultyValue = selectedDifficulty.id;
+      // Event listener for difficulty selection
+      difficultySelectElement.addEventListener('change', (event) => {
+        const selectedDifficulty = event.target.options[event.target.selectedIndex];
+        difficultyValue = selectedDifficulty.id;
+      })
+
+      const nextButton = document.createElement('button');
+      nextButton.innerText = 'Next';
+      nextButton.classList.add('next-button');
+      box.appendChild(nextButton);
+
+      // Event listener for the next button
+      nextButton.addEventListener('click', () => {
+        if (selectedCategoryID === 'default-option' || difficultyValue === 'default-option') {
+          alert('Please Select a Valid Category or Quiz Option');
+        }
+        else {
+          quiz(selectedCategoryID, difficultyValue);
+        }
+      });
+
     })
+    .catch((error) => {
+      box.innerHTML = 'Error loading quiz questions';
+    })
+}
 
-    const nextButton = document.createElement('button');
-    nextButton.innerText = 'Next';
-    nextButton.classList.add('next-button');
-    box.appendChild(nextButton);
-
-    // Event listener for the next button
-    nextButton.addEventListener('click', () => {
-      if (selectedCategoryID === 'default-option' || difficultyValue === 'default-option') {
-        alert('Please Select a Valid Category or Quiz Option');
-      }
-      else {
-        quiz(selectedCategoryID, difficultyValue);
-      }
-    });
-
-  })
-  .catch((error) => {
-    box.innerHTML = 'Error loading quiz questions';
-  })
-
-
-
+renderHomePage()
 
 
 // Function to fetch and display quiz questions
@@ -274,12 +277,23 @@ function quiz(selectedCategoryID, difficultyValue) {
 
         });
 
-        resultHTML +=`
+        resultHTML += `
         <p class='total-score'>Your total score: ${totalScore} out of 5</p>
+        `
+
+        resultHTML += `
+        <button class="home-button">Home</button>
         `
 
         // Display the result HTML in the box
         box.innerHTML = resultHTML;
+
+        document.querySelector('.home-button').addEventListener('click', () => {
+          box.innerHTML = " ";
+          renderHomePage();
+        })
+
+
         document.body.style.backgroundImage = 'url(./images/right-wrong.webp)';
       });
 
