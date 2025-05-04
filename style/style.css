@@ -103,6 +103,7 @@ h3 {
 
 .projects-grouped {
   display: grid;
+  grid-template-columns: auto auto;
   place-items: center;
 }
 
