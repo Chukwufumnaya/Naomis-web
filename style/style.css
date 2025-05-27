@@ -70,7 +70,6 @@ h3 {
 }
 
 .profile {
-  min-width: 29%;
   max-width: 35%;
   object-fit: cover;
   float: left;
@@ -194,7 +193,7 @@ figcaption {
   display: none;
 }
 
-.dropdown-content {
+.dropdown-container {
   position: absolute;
   background-color: black;
   width: 100%;
@@ -210,18 +209,18 @@ figcaption {
   text-decoration: none;
   color: white;
   font-family: 'Montserrat';
-  font-size: 17.3px;
+  font-size: 19.3px;
   padding: 20px;
 }
 
 .dropdown-content a:hover {
-  color: #7f5891;
+  color: #7a0d37;
   font-style: oblique;
   font-weight: 600;
 }
 
 
-.dropdown:hover .dropdown-content {
+.small-screen-navbar:hover .dropdown-container {
   display: block;
 }
 
@@ -262,6 +261,10 @@ figcaption {
     display: block;
   }
 
+  body {
+    overflow-x: hidden;
+  }
+  
   .projects-grouped img {
     width: 270px;
     height: 300px;
