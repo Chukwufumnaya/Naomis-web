@@ -64,13 +64,14 @@ h3 {
 }
 
 .aboutParagraphContainer {
-  width: 1000px;
+  max-width: 870px;
   margin: auto;
- padding: 10px;
+  padding: 10px;
 }
 
 .profile {
-  width: 300px;
+  min-width: 29%;
+  max-width: 35%;
   object-fit: cover;
   float: left;
   margin-right: 10px;
@@ -80,11 +81,8 @@ h3 {
 .aboutParagraph {
   font-family: 'Sorts Mill Goudy';
   font-size: 25px;
-  margin-top: 60px;
   text-align: center;
 }
-
-
 
 .hugetext {
   font-size: 50px;
@@ -227,7 +225,7 @@ figcaption {
   display: block;
 }
 
-@media (min-width:600px) and (max-width: 900px) {
+@media (min-width:600px) and (max-width: 1300px) {
   .navbar {
     display: none;
   }
@@ -280,5 +278,13 @@ figcaption {
     grid-template-columns: auto;
     place-items: center;
     gap: 20px;
+  }
+
+  .hugetext{
+    font-size: 36px;
+  }
+
+  .aboutParagraph{
+    font-size: 18px;
   }
 }
