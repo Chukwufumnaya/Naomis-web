@@ -63,11 +63,31 @@ h3 {
   background-color: #c0a2ce;
 }
 
+.aboutParagraphContainer {
+  width: 1000px;
+  margin: auto;
+ padding: 10px;
+}
+
+.profile {
+  width: 300px;
+  object-fit: cover;
+  float: left;
+  margin-right: 10px;
+  shape-outside: circle(50%);
+}
+
 .aboutParagraph {
   font-family: 'Sorts Mill Goudy';
-  font-size: 20px;
+  font-size: 25px;
   margin-top: 60px;
   text-align: center;
+}
+
+
+
+.hugetext {
+  font-size: 50px;
 }
 
 .findMe {
