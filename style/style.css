@@ -257,6 +257,7 @@ h3 {
   .project-card img {
     width: 450px;
     height: 250px;
+    object-fit: cover;
   }
 
   .project-card p {
